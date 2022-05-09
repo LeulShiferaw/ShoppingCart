@@ -207,12 +207,22 @@ const Products = (props) => {
   };
   // TODO: implement the restockProducts function
   const restockProducts = function (url) {
-    let dummy = items.map((item, i) => {
-      let dummy1 = item;
-      dummy1.instock = dummy1.instock + products[i].instock;
-      return dummy1;
-    });
-    setItems(dummy);
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    
+    fetch(query, requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        let dummy = items.map((item, i) => {
+          let dummy1 = item;
+          dummy1.instock = dummy1.instock + result.data[i].attributes.instock;
+          return dummy1;
+        });
+        setItems(dummy);
+      })
+      .catch(error => console.log('error', error));
   };
 
   return (
