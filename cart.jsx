@@ -132,7 +132,7 @@ const Products = (props) => {
     console.log("restocking item: ", restockItem);
     let dummy = items;
     for(let i = 0; i < dummy.length; i++) {
-      if(i == index)
+      if(dummy[i].name == restockItem[0].name)
       { 
         dummy[i].instock++;
       }
